@@ -34,5 +34,16 @@ main {
   background: #fff;
   padding: 1em;
   border: 1px solid #ccc;
-  width: 200px;
+  width: 220px;
+}
+
+.product img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 0.5em;
+}
+
+input[type="number"] {
+  width: 60px;
+  margin-top: 0.5em;
 }
