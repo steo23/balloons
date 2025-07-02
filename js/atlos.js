@@ -19,16 +19,17 @@ function addToCart(id, name, price) {
   }
 
   if (qty > stock[id]) {
-    alert(`Sorry, only ${stock[id]} in stock.`);
+    alert(`Only ${stock[id]} in stock.`);
     return;
   }
 
   cart.push({ name, price, qty });
   stock[id] -= qty;
+
   stockDisplay.textContent = stock[id];
   alert(`${qty} x ${name} added to cart.`);
 
-  // Disable if out of stock
+  // If stock is now 0, disable input and hide button
   if (stock[id] === 0) {
     qtyInput.disabled = true;
     btn.style.display = "none";
@@ -44,14 +45,14 @@ function viewCart() {
   }
 
   let total = 0;
-  let message = "🛒 Your Cart:\n\n";
+  let summary = "🛒 Your Cart:\n\n";
 
   cart.forEach(item => {
     const itemTotal = item.price * item.qty;
     total += itemTotal;
-    message += `${item.qty} x ${item.name} = €${itemTotal.toFixed(2)}\n`;
+    summary += `${item.qty} x ${item.name} = €${itemTotal.toFixed(2)}\n`;
   });
 
-  message += `\nTotal: €${total.toFixed(2)}`;
-  alert(message);
+  summary += `\nTotal: €${total.toFixed(2)}`;
+  alert(summary);
 }
