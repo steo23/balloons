@@ -21,11 +21,6 @@
     label {
       text-align: left;
     }
-
-    .error {
-      color: red;
-      font-size: 0.9em;
-    }
   </style>
 </head>
 <body>
@@ -69,22 +64,17 @@
     document.getElementById("checkout-form").addEventListener("submit", function(e) {
       e.preventDefault();
 
-      // Collect form values
       const customer = {
         name: document.getElementById("name").value,
         address: document.getElementById("address").value,
         eircode: document.getElementById("eircode").value,
         phone: document.getElementById("phone").value,
-        email: document.getElementById("email").value,
+        email: document.getElementById("email").value
       };
 
-      // Save to localStorage (or send to backend/email later)
       localStorage.setItem("customer", JSON.stringify(customer));
-
-      // Clear cart if you want
       localStorage.removeItem("cart");
 
-      // Redirect to thank you page
       window.location.href = "thankyou.html";
     });
   </script>
