@@ -19,9 +19,18 @@ function addToCart(id, name, price) {
   cart.push({ name, price, qty });
   stock[id] -= qty;
 
+  // Update stock display
   document.getElementById(`stock-${id}`).textContent = stock[id];
+
+  // Disable input and hide button if stock hits 0
+  if (stock[id] === 0) {
+    qtyInput.disabled = true;
+    document.querySelector(`button[onclick*="${id}"]`).style.display = "none";
+  }
+
   alert(`${qty} x ${name} added to cart.`);
 }
+
 
 function viewCart() {
   if (cart.length === 0) {
