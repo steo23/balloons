@@ -4,10 +4,10 @@ if (!localStorage.getItem("cartVersion")) {
 }
 
 let stock = JSON.parse(localStorage.getItem("stock")) || {
-  year: 10,
-  tear: 10,
-  sub: 10,
-  stick: 1
+  year: 100,
+  tear: 100,
+  sub: 0,
+  stick: 0,
 };
 
 let cart = JSON.parse(localStorage.getItem("cart") || "[]");
