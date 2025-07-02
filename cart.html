@@ -71,27 +71,12 @@
       const item = cart[index];
       cart.splice(index, 1);
       localStorage.setItem("cart", JSON.stringify(cart));
-
-      // Update stock (optional)
-      let stock = JSON.parse(localStorage.getItem("stock") || "{}");
-      if (stock[item.id] !== undefined) {
-        stock[item.id] += item.qty;
-        localStorage.setItem("stock", JSON.stringify(stock));
-      }
-
       renderCart();
     }
 
     function checkout() {
-  window.location.href = "checkout.html";
-}
-
-  // Optional: Also reset stock for demo/testing
-  // localStorage.removeItem("stock");
-
-  // Redirect to thank-you page
-  window.location.href = "thankyou.html";
-}
+      window.location.href = "checkout.html";
+    }
 
     window.onload = renderCart;
   </script>
