@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your Cart</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    function renderCart() {
+      const cartContainer = document.getElementById("cart-items");
+      const totalSpan = document.getElementById("total");
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+        totalSpan.textContent = "€0.00";
+        return;
+      }
+
+      let total = 0;
+      cartContainer.innerHTML = "";
+
+      cart.forEach(item => {
+        const itemTotal = item.price * item.qty;
+        total += itemTotal;
+
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `<strong>${item.name}</strong> × ${item.qty} = €${itemTotal.toFixed(2)}`;
+        cartContainer.appendChild(div);
+      });
+
+      totalSpan.textContent = `€${total.toFixed(2)}`;
+    }
+
+    function checkout() {
+      alert("✅ Checkout triggered. This is where Atlos integration will go.");
+    }
+
+    window.onload = renderCart;
+  </script>
+  <style>
+    .cart-item {
+      margin: 1em 0;
+    }
+    .cart-controls {
+      margin-top: 2em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Your Cart</h1>
+    <nav><a href="products.html">← Back to Products</a></nav>
+  </header>
+
+  <main style="padding: 2em; text-align: center;">
+    <div id="cart-items"></div>
+    <div class="cart-controls">
+      <p><strong>Total:</strong> <span id="total">€0.00</span></p>
+      <button onclick="checkout()">💳 Checkout</button>
+    </div>
+  </main>
+</body>
+</html>
 
