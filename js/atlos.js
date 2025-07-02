@@ -1,11 +1,12 @@
-let stock = {
+// Make cart and stock globally accessible
+window.stock = {
   year: 10,
   tear: 10,
   sub: 10,
   stick: 1
 };
 
-let cart = [];
+window.cart = [];
 
 function addToCart(id, name, price) {
   const qtyInput = document.getElementById(`qty-${id}`);
@@ -23,13 +24,19 @@ function addToCart(id, name, price) {
     return;
   }
 
-  cart.push({ name, price, qty });
+  // Add to cart or update existing item
+  const existingItem = cart.find(item => item.id === id);
+  if (existingItem) {
+    existingItem.qty += qty;
+  } else {
+    cart.push({ id, name, price, qty });
+  }
+
   stock[id] -= qty;
 
   stockDisplay.textContent = stock[id];
   alert(`${qty} x ${name} added to cart.`);
 
-  // If stock is now 0, disable input and hide button
   if (stock[id] === 0) {
     qtyInput.disabled = true;
     btn.style.display = "none";
@@ -39,7 +46,7 @@ function addToCart(id, name, price) {
 }
 
 function viewCart() {
-  if (cart.length === 0) {
+  if (!cart || cart.length === 0) {
     alert("Your cart is empty.");
     return;
   }
