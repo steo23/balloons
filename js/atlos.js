@@ -1,11 +1,16 @@
-let stock = {
+let stock = JSON.parse(localStorage.getItem("stock")) || {
   year: 10,
   tear: 10,
   sub: 10,
   stick: 1
 };
 
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+function saveState() {
+  localStorage.setItem("stock", JSON.stringify(stock));
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
 
 function addToCart(id, name, price) {
   const qtyInput = document.getElementById(`qty-${id}`);
@@ -33,7 +38,7 @@ function addToCart(id, name, price) {
   stock[id] -= qty;
   stockDisplay.textContent = stock[id];
 
-  localStorage.setItem('cart', JSON.stringify(cart)); // ✅ store cart
+  saveState(); // save both cart and stock
 
   alert(`${qty} x ${name} added to cart.`);
 
@@ -44,3 +49,21 @@ function addToCart(id, name, price) {
     qtyInput.max = stock[id];
   }
 }
+
+window.onload = () => {
+  // Restore stock visually on product page
+  for (const id in stock) {
+    const stockEl = document.getElementById(`stock-${id}`);
+    const qtyInput = document.getElementById(`qty-${id}`);
+    const btn = document.getElementById(`btn-${id}`);
+
+    if (stockEl) stockEl.textContent = stock[id];
+    if (qtyInput) qtyInput.max = stock[id];
+    if (qtyInput && stock[id] === 0) {
+      qtyInput.disabled = true;
+    }
+    if (btn && stock[id] === 0) {
+      btn.style.display = "none";
+    }
+  }
+};
