@@ -12,12 +12,10 @@
       flex-direction: column;
       gap: 1em;
     }
-
     input, button {
       padding: 10px;
       font-size: 1em;
     }
-
     label {
       text-align: left;
     }
@@ -33,72 +31,57 @@
     <form id="checkout-form" method="POST" action="https://formspree.io/f/xovwbdvp" data-redirect="thankyou.html">
       <label>
         Full Name
-        <input type="text" id="name" name="name" required />
+        <input type="text" name="name" required />
       </label>
 
       <label>
         Address
-        <input type="text" id="address" name="address" required />
+        <input type="text" name="address" required />
       </label>
 
       <label>
         Eircode
-        <input type="text" id="eircode" name="eircode" required />
+        <input type="text" name="eircode" required />
       </label>
 
       <label>
         Phone Number
-        <input type="tel" id="phone" name="phone" required />
+        <input type="tel" name="phone" required />
       </label>
 
       <label>
         Email Address
-        <input type="email" id="email" name="email" required />
+        <input type="email" name="email" required />
       </label>
+
+      <!-- Cart summary will be added to this hidden field via JS -->
+      <input type="hidden" name="order_details" id="order_details" />
 
       <button type="submit">Place Order</button>
     </form>
   </main>
 
   <script>
-    document.getElementById("checkout-form").addEventListener("submit", function (e) {
-      e.preventDefault();
+    const form = document.getElementById("checkout-form");
 
-      const name = document.getElementById("name").value;
-      const address = document.getElementById("address").value;
-      const eircode = document.getElementById("eircode").value;
-      const phone = document.getElementById("phone").value;
-      const email = document.getElementById("email").value;
-
+    form.addEventListener("submit", function (e) {
+      // Build order summary from cart before submit
       const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-      let message = `🛒 New Order from ${name}\n\n`;
-      message += `Email: ${email}\nPhone: ${phone}\nAddress: ${address}\nEircode: ${eircode}\n\n`;
-      message += `🧾 Cart:\n`;
-
+      let summary = "🛒 Order Summary:\n";
       let total = 0;
+
       cart.forEach(item => {
-        message += `- ${item.name} × ${item.qty} = €${(item.qty * item.price).toFixed(2)}\n`;
+        const line = `- ${item.name} × ${item.qty} = €${(item.qty * item.price).toFixed(2)}\n`;
+        summary += line;
         total += item.qty * item.price;
       });
 
-      message += `\nTotal: €${total.toFixed(2)}\n`;
-      message += `Time: ${new Date().toLocaleString()}`;
+      summary += `\nTotal: €${total.toFixed(2)}\n`;
+      summary += `Time: ${new Date().toLocaleString()}`;
 
-      const form = e.target;
-      const hiddenField = document.createElement("input");
-      hiddenField.type = "hidden";
-      hiddenField.name = "order_details";
-      hiddenField.value = message;
-      form.appendChild(hiddenField);
+      // Inject into hidden field
+      document.getElementById("order_details").value = summary;
 
-      // Clear cart + customer data
-      localStorage.removeItem("cart");
-      localStorage.removeItem("customer");
-      localStorage.removeItem("stock");
-
-      form.submit();
-    });
-  </script>
-</body>
-</html>
+      // Clear storage (after 100ms to let Formspree submit first)
+      setTimeout(() =>
