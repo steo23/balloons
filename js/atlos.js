@@ -62,4 +62,8 @@ function viewCart() {
 
   summary += `\nTotal: €${total.toFixed(2)}`;
   alert(summary);
+
+  // ✅ This line makes the hidden checkout button visible
+  const checkoutBtn = document.getElementById("checkout-btn");
+  checkoutBtn.style.display = "inline-block";
 }
