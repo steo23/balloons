@@ -1,12 +1,12 @@
-// Make cart and stock globally accessible
-window.stock = {
+// Global cart and stock
+let stock = {
   year: 10,
   tear: 10,
   sub: 10,
   stick: 1
 };
 
-window.cart = [];
+let cart = [];
 
 function addToCart(id, name, price) {
   const qtyInput = document.getElementById(`qty-${id}`);
@@ -24,19 +24,19 @@ function addToCart(id, name, price) {
     return;
   }
 
-  // Add to cart or update existing item
-  const existingItem = cart.find(item => item.id === id);
-  if (existingItem) {
-    existingItem.qty += qty;
+  // Add or update cart item
+  const existing = cart.find(item => item.id === id);
+  if (existing) {
+    existing.qty += qty;
   } else {
     cart.push({ id, name, price, qty });
   }
 
   stock[id] -= qty;
-
   stockDisplay.textContent = stock[id];
   alert(`${qty} x ${name} added to cart.`);
 
+  // Disable input and hide button if sold out
   if (stock[id] === 0) {
     qtyInput.disabled = true;
     btn.style.display = "none";
@@ -63,7 +63,13 @@ function viewCart() {
   summary += `\nTotal: €${total.toFixed(2)}`;
   alert(summary);
 
-  // ✅ This line makes the hidden checkout button visible
+  // Show the checkout button
   const checkoutBtn = document.getElementById("checkout-btn");
-  checkoutBtn.style.display = "inline-block";
+  if (checkoutBtn) {
+    checkoutBtn.style.display = "inline-block";
+  }
+}
+
+function checkout() {
+  alert("✅ Checkout triggered. Ready to integrate with Atlos.");
 }
