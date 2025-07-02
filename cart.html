@@ -83,8 +83,15 @@
     }
 
     function checkout() {
-      alert("✅ Checkout triggered. This is where Atlos payment will go.");
-    }
+  // Clear cart and stock
+  localStorage.removeItem("cart");
+
+  // Optional: Also reset stock for demo/testing
+  // localStorage.removeItem("stock");
+
+  // Redirect to thank-you page
+  window.location.href = "thankyou.html";
+}
 
     window.onload = renderCart;
   </script>
