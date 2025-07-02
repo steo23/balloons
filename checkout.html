@@ -30,30 +30,30 @@
   </header>
 
   <main>
-    <form id="checkout-form">
+    <form id="checkout-form" method="POST" action="https://formspree.io/f/xovwbdvp" data-redirect="thankyou.html">
       <label>
         Full Name
-        <input type="text" id="name" required />
+        <input type="text" id="name" name="name" required />
       </label>
 
       <label>
         Address
-        <input type="text" id="address" required />
+        <input type="text" id="address" name="address" required />
       </label>
 
       <label>
         Eircode
-        <input type="text" id="eircode" required />
+        <input type="text" id="eircode" name="eircode" required />
       </label>
 
       <label>
         Phone Number
-        <input type="tel" id="phone" required />
+        <input type="tel" id="phone" name="phone" required />
       </label>
 
       <label>
         Email Address
-        <input type="email" id="email" required />
+        <input type="email" id="email" name="email" required />
       </label>
 
       <button type="submit">Place Order</button>
@@ -61,21 +61,43 @@
   </main>
 
   <script>
-    document.getElementById("checkout-form").addEventListener("submit", function(e) {
+    document.getElementById("checkout-form").addEventListener("submit", function (e) {
       e.preventDefault();
 
-      const customer = {
-        name: document.getElementById("name").value,
-        address: document.getElementById("address").value,
-        eircode: document.getElementById("eircode").value,
-        phone: document.getElementById("phone").value,
-        email: document.getElementById("email").value
-      };
+      const name = document.getElementById("name").value;
+      const address = document.getElementById("address").value;
+      const eircode = document.getElementById("eircode").value;
+      const phone = document.getElementById("phone").value;
+      const email = document.getElementById("email").value;
 
-      localStorage.setItem("customer", JSON.stringify(customer));
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+      let message = `🛒 New Order from ${name}\n\n`;
+      message += `Email: ${email}\nPhone: ${phone}\nAddress: ${address}\nEircode: ${eircode}\n\n`;
+      message += `🧾 Cart:\n`;
+
+      let total = 0;
+      cart.forEach(item => {
+        message += `- ${item.name} × ${item.qty} = €${(item.qty * item.price).toFixed(2)}\n`;
+        total += item.qty * item.price;
+      });
+
+      message += `\nTotal: €${total.toFixed(2)}\n`;
+      message += `Time: ${new Date().toLocaleString()}`;
+
+      const form = e.target;
+      const hiddenField = document.createElement("input");
+      hiddenField.type = "hidden";
+      hiddenField.name = "order_details";
+      hiddenField.value = message;
+      form.appendChild(hiddenField);
+
+      // Clear cart + customer data
       localStorage.removeItem("cart");
+      localStorage.removeItem("customer");
+      localStorage.removeItem("stock");
 
-      window.location.href = "thankyou.html";
+      form.submit();
     });
   </script>
 </body>
