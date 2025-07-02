@@ -52,15 +52,13 @@
       <button onclick="addToCart('sub', 'Unlimited Sub Only', 120)">Add to Cart</button>
     </div>
 
-   <div class="product">
-  <img src="https://images.app.goo.gl/GsQKZKQkEwp6UuFa6" alt="unlimited with stick">
+   <div class="product" id="product-stick">
+  <img src="https://images.app.goo.gl/GsQKZKQkEwp6UuFa6" alt="Unlimited with Stick">
   <h3>Unlimited with Stick</h3>
   <p>€170.00</p>
   <p>Unlimited stick</p>
   <p><strong>In stock:</strong> <span id="stock-stick">1</span></p>
-  <label>
-    Qty:
-    <input type="number" id="qty-stick" min="1" value="1" max="1">
-  </label>
-  <button onclick="addToCart('stick', 'Unlimited with Stick', 170)">Add to Cart</button>
+  <label for="qty-stick">Qty:</label>
+  <input type="number" id="qty-stick" min="1" value="1" max="1">
+  <button id="btn-stick" onclick="addToCart('stick', 'Unlimited with Stick', 170)">Add to Cart</button>
 </div>
