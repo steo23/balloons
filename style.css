@@ -53,3 +53,64 @@ button {
   margin-top: 0.5em;
   cursor: pointer;
 }
+/* Basic Mobile Optimisation */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  padding: 1em;
+  box-sizing: border-box;
+}
+
+.product, .cart-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 1em;
+  margin-bottom: 1em;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+button, input[type="submit"] {
+  padding: 12px;
+  font-size: 1em;
+  border: none;
+  border-radius: 6px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+input, select {
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+/* Mobile Layout Fix */
+@media (max-width: 600px) {
+  .product {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  form {
+    padding: 1em;
+  }
+}
