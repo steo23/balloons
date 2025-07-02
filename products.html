@@ -12,28 +12,49 @@
   </header>
 
   <main class="product-grid">
-    <div class="product">
-      <h3>Product 1</h3>
-      <p>$10.00</p>
-      <button onclick="buyNow('product1')">Buy Now</button>
-    </div>
-    <div class="product">
-      <h3>Product 2</h3>
-      <p>$15.00</p>
-      <button onclick="buyNow('product2')">Buy Now</button>
-    </div>
-    <div class="product">
-      <h3>Product 3</h3>
-      <p>$20.00</p>
-      <button onclick="buyNow('product3')">Buy Now</button>
-    </div>
-    <div class="product">
-      <h3>Product 4</h3>
-      <p>$25.00</p>
-      <button onclick="buyNow('product4')">Buy Now</button>
-    </div>
-  </main>
 
-  <script src="js/atlos.js"></script>
-</body>
-</html>
+    <div class="product">
+      <img src="https://images.app.goo.gl/GsQKZKQkEwp6UuFa6" alt="year only">
+      <h3>Year Only</h3>
+      <p>$70.00</p>
+      <p>Year without stick</p>
+      <p><strong>In stock:</strong> <span id="stock-year">10</span></p>
+      <label>
+        Qty:
+        <input type="number" id="qty-year" min="1" value="1">
+      </label>
+      <button onclick="addToCart('year', 'Year Only', 70)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://images.app.goo.gl/GsQKZKQkEwp6UuFa6" alt="tear inc stick">
+      <h3>Tear inc Stick</h3>
+      <p>$140.00</p>
+      <p>Year with stick</p>
+      <p><strong>In stock:</strong> <span id="stock-tear">10</span></p>
+      <label>
+        Qty:
+        <input type="number" id="qty-tear" min="1" value="1">
+      </label>
+      <button onclick="addToCart('tear', 'Tear inc Stick', 140)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://images.app.goo.gl/GsQKZKQkEwp6UuFa6" alt="unlimited sub only">
+      <h3>Unlimited Sub Only</h3>
+      <p>$120.00</p>
+      <p>Unlimited sub only</p>
+      <p><strong>In stock:</strong> <span id="stock-sub">10</span></p>
+      <label>
+        Qty:
+        <input type="number" id="qty-sub" min="1" value="1">
+      </label>
+      <button onclick="addToCart('sub', 'Unlimited Sub Only', 120)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://images.app.goo.gl/GsQKZKQkEwp6UuFa6" alt="unlimited with stick">
+      <h3>Unlimited with Stick</h3>
+      <p>$170.00</p>
+      <p>Unlimited stick</p>
+      <p><strong>In stock:</strong> <span id="stock-stick">
