@@ -4,8 +4,39 @@
   <meta charset="UTF-8" />
   <title>Your Cart</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .cart-item {
+      margin: 1em 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+
+    .cart-controls {
+      margin-top: 2em;
+      text-align: center;
+    }
+
+    .remove-btn {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 4px 10px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
   <script>
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    let cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
     function renderCart() {
       const cartContainer = document.getElementById("cart-items");
@@ -17,36 +48,46 @@
         return;
       }
 
-      let total = 0;
       cartContainer.innerHTML = "";
+      let total = 0;
 
-      cart.forEach(item => {
+      cart.forEach((item, index) => {
         const itemTotal = item.price * item.qty;
         total += itemTotal;
 
         const div = document.createElement("div");
         div.className = "cart-item";
-        div.innerHTML = `<strong>${item.name}</strong> × ${item.qty} = €${itemTotal.toFixed(2)}`;
+        div.innerHTML = `
+          <span><strong>${item.name}</strong> × ${item.qty} = €${itemTotal.toFixed(2)}</span>
+          <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+        `;
         cartContainer.appendChild(div);
       });
 
       totalSpan.textContent = `€${total.toFixed(2)}`;
     }
 
+    function removeItem(index) {
+      const item = cart[index];
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      // Update stock (optional)
+      let stock = JSON.parse(localStorage.getItem("stock") || "{}");
+      if (stock[item.id] !== undefined) {
+        stock[item.id] += item.qty;
+        localStorage.setItem("stock", JSON.stringify(stock));
+      }
+
+      renderCart();
+    }
+
     function checkout() {
-      alert("✅ Checkout triggered. This is where Atlos integration will go.");
+      alert("✅ Checkout triggered. This is where Atlos payment will go.");
     }
 
     window.onload = renderCart;
   </script>
-  <style>
-    .cart-item {
-      margin: 1em 0;
-    }
-    .cart-controls {
-      margin-top: 2em;
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -63,4 +104,3 @@
   </main>
 </body>
 </html>
-
