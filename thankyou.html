@@ -3,25 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <title>Thank You</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    main {
+    body {
+      font-family: sans-serif;
       text-align: center;
-      padding: 3em;
+      padding: 2em;
+    }
+
+    .thankyou-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #f8f8f8;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    h1 {
+      color: #28a745;
+    }
+
+    a.button {
+      display: inline-block;
+      margin-top: 1.5em;
+      padding: 10px 20px;
+      background: #007bff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+
+    a.button:hover {
+      background: #0056b3;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🎉 Thank You!</h1>
-  </header>
-
-  <main>
+  <div class="thankyou-container">
+    <h1>Thank You!</h1>
     <p>Your order has been placed successfully.</p>
-    <p>We'll process it shortly.</p>
-    <a href="products.html">
-      <button>← Back to Shop</button>
-    </a>
-  </main>
+
+    <p><strong>You selected: Cash on Collection</strong></p>
+    <p>We’ll contact you shortly to confirm pickup details.</p>
+
+    <p>If you have any questions, feel free to reach out.</p>
+
+    <a href="products.html" class="button">← Back to Products</a>
+  </div>
 </body>
 </html>
