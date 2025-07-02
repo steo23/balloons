@@ -1,0 +1,38 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
+}
+
+header, footer {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1em;
+}
+
+nav a {
+  color: #00e0ff;
+  text-decoration: none;
+  margin: 0 1em;
+}
+
+main {
+  padding: 2em;
+  text-align: center;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
+}
+
+.product {
+  background: #fff;
+  padding: 1em;
+  border: 1px solid #ccc;
+  width: 200px;
+}
