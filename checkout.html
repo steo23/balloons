@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    form {
+      max-width: 400px;
+      margin: 2em auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 1em;
+    }
+
+    label {
+      text-align: left;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Checkout</h1>
+    <nav><a href="cart.html">← Back to Cart</a></nav>
+  </header>
+
+  <main>
+    <form id="checkout-form">
+      <label>
+        Full Name
+        <input type="text" id="name" required />
+      </label>
+
+      <label>
+        Address
+        <input type="text" id="address" required />
+      </label>
+
+      <label>
+        Eircode
+        <input type="text" id="eircode" required />
+      </label>
+
+      <label>
+        Phone Number
+        <input type="tel" id="phone" required />
+      </label>
+
+      <label>
+        Email Address
+        <input type="email" id="email" required />
+      </label>
+
+      <button type="submit">Place Order</button>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById("checkout-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      // Collect form values
+      const customer = {
+        name: document.getElementById("name").value,
+        address: document.getElementById("address").value,
+        eircode: document.getElementById("eircode").value,
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("email").value,
+      };
+
+      // Save to localStorage (or send to backend/email later)
+      localStorage.setItem("customer", JSON.stringify(customer));
+
+      // Clear cart if you want
+      localStorage.removeItem("cart");
+
+      // Redirect to thank you page
+      window.location.href = "thankyou.html";
+    });
+  </script>
+</body>
+</html>
