@@ -1,3 +1,8 @@
+if (!localStorage.getItem("cartVersion")) {
+  localStorage.clear(); // clear old format once
+  localStorage.setItem("cartVersion", "v2"); // mark that we're using the new one
+}
+
 let stock = JSON.parse(localStorage.getItem("stock")) || {
   year: 10,
   tear: 10,
