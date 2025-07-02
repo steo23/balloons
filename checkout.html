@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Products</title>
+  <title>Checkout</title>
   <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     form {
       max-width: 400px;
@@ -13,12 +13,28 @@
       flex-direction: column;
       gap: 1em;
     }
-    input, button {
+
+    input, select, button {
       padding: 10px;
       font-size: 1em;
+      border-radius: 6px;
+      border: 1px solid #ccc;
     }
+
     label {
       text-align: left;
+      font-weight: bold;
+    }
+
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
     }
   </style>
 </head>
@@ -32,30 +48,38 @@
     <form id="checkout-form" method="POST" action="https://formspree.io/f/xovwbdvp" data-redirect="thankyou.html">
       <label>
         Full Name
-        <input type="text" name="name" required />
+        <input type="text" name="name" id="name" required />
       </label>
 
       <label>
         Address
-        <input type="text" name="address" required />
+        <input type="text" name="address" id="address" required />
       </label>
 
       <label>
         Eircode
-        <input type="text" name="eircode" required />
+        <input type="text" name="eircode" id="eircode" required />
       </label>
 
       <label>
         Phone Number
-        <input type="tel" name="phone" required />
+        <input type="tel" name="phone" id="phone" required />
       </label>
 
       <label>
         Email Address
-        <input type="email" name="email" required />
+        <input type="email" name="email" id="email" required />
       </label>
 
-      <!-- Cart summary will be added to this hidden field via JS -->
+      <label>
+        Payment Method
+        <select name="payment_method" id="payment_method" required>
+          <option value="Cash on Collection">Cash on Collection</option>
+          <option value="Online (coming soon)">Online (coming soon)</option>
+        </select>
+      </label>
+
+      <!-- Hidden field for cart summary -->
       <input type="hidden" name="order_details" id="order_details" />
 
       <button type="submit">Place Order</button>
@@ -66,23 +90,30 @@
     const form = document.getElementById("checkout-form");
 
     form.addEventListener("submit", function (e) {
-      // Build order summary from cart before submit
+      // Build cart summary
       const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-
       let summary = "🛒 Order Summary:\n";
       let total = 0;
 
       cart.forEach(item => {
-        const line = `- ${item.name} × ${item.qty} = €${(item.qty * item.price).toFixed(2)}\n`;
-        summary += line;
-        total += item.qty * item.price;
+        summary += `- ${item.name} × ${item.qty} = €${(item.price * item.qty).toFixed(2)}\n`;
+        total += item.price * item.qty;
       });
 
       summary += `\nTotal: €${total.toFixed(2)}\n`;
+      summary += `Payment Method: ${document.getElementById("payment_method").value}\n`;
       summary += `Time: ${new Date().toLocaleString()}`;
 
-      // Inject into hidden field
+      // Inject summary
       document.getElementById("order_details").value = summary;
 
-      // Clear storage (after 100ms to let Formspree submit first)
-      setTimeout(() =>
+      // Clear cart + customer data after a short delay
+      setTimeout(() => {
+        localStorage.removeItem("cart");
+        localStorage.removeItem("stock");
+        localStorage.removeItem("customer");
+      }, 100);
+    });
+  </script>
+</body>
+</html>
