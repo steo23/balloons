@@ -1,4 +1,4 @@
-/* Reset and base styles */
+/* Reset and base */
 * {
   box-sizing: border-box;
 }
@@ -13,7 +13,7 @@ body {
   line-height: 1.6;
 }
 
-/* Container styles */
+/* Containers */
 main, header, footer, nav, section, article, div {
   position: relative;
   background-color: #fff;
@@ -223,17 +223,10 @@ textarea {
   min-height: 100px;
 }
 
-/* Fix for heading visibility - remove opacity and ensure color */
+/* Force headings fully visible */
 h1, h2, h3, h4, h5, h6 {
   opacity: 1 !important;
   color: #222 !important;
   visibility: visible !important;
-  transition: none !important;
-  position: relative !important;
-  z-index: 10 !important;
-}
-
-/* Remove any opacity transitions on headings */
-h1, h2, h3, h4, h5, h6 {
   transition: none !important;
 }
