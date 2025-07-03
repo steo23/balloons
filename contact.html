@@ -5,6 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact Us - Balloons Shop</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    main {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #fff; /* ensures form background */
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, textarea {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    button {
+      padding: 12px;
+      font-size: 16px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body class="contact-page">
   <header>
@@ -19,7 +63,22 @@
   </header>
 
   <main>
-    <!-- Your contact form here -->
+    <form action="https://formspree.io/f/xovwbdvp" method="POST">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="_replyto" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
   </main>
+
+  <footer>
+    &copy; 2025 Balloons Shop
+  </footer>
 </body>
 </html>
