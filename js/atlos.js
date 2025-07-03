@@ -1,6 +1,7 @@
+// Initialize stock and cart with version check
 if (!localStorage.getItem("cartVersion")) {
   localStorage.clear(); // clear old format once
-  localStorage.setItem("cartVersion", "v2"); // mark that we're using the new one
+  localStorage.setItem("cartVersion", "v2"); // mark new version
 }
 
 let stock = JSON.parse(localStorage.getItem("stock")) || {
@@ -43,7 +44,7 @@ function addToCart(id, name, price) {
   stock[id] -= qty;
   stockDisplay.textContent = stock[id];
 
-  saveState(); // save both cart and stock
+  saveState();
 
   alert(`${qty} x ${name} added to cart.`);
 
@@ -55,8 +56,48 @@ function addToCart(id, name, price) {
   }
 }
 
+function renderCart() {
+  const cartItemsDiv = document.getElementById('cart-items');
+  const emptyMessage = document.getElementById('empty-cart-message');
+  cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+  cartItemsDiv.innerHTML = '';
+
+  if (cart.length === 0) {
+    emptyMessage.style.display = 'block';
+    return;
+  }
+
+  emptyMessage.style.display = 'none';
+
+  let total = 0;
+
+  cart.forEach(item => {
+    const subtotal = item.price * item.qty;
+    total += subtotal;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'cart-item';
+    itemDiv.innerHTML = `
+      <h3>${item.name}</h3>
+      <p>Price: €${item.price.toFixed(2)}</p>
+      <p>Quantity: ${item.qty}</p>
+      <p>Subtotal: €${subtotal.toFixed(2)}</p>
+      <hr>
+    `;
+    cartItemsDiv.appendChild(itemDiv);
+  });
+
+  // Show total
+  const totalDiv = document.createElement('div');
+  totalDiv.style.fontWeight = 'bold';
+  totalDiv.style.fontSize = '1.2rem';
+  totalDiv.textContent = `Total: €${total.toFixed(2)}`;
+  cartItemsDiv.appendChild(totalDiv);
+}
+
+// Restore stock visually on product page
 window.onload = () => {
-  // Restore stock visually on product page
   for (const id in stock) {
     const stockEl = document.getElementById(`stock-${id}`);
     const qtyInput = document.getElementById(`qty-${id}`);
@@ -70,5 +111,10 @@ window.onload = () => {
     if (btn && stock[id] === 0) {
       btn.style.display = "none";
     }
+  }
+
+  // Render cart if on cart page
+  if (document.getElementById('cart-items')) {
+    renderCart();
   }
 };
