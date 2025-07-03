@@ -2,117 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Checkout</title>
   <link rel="stylesheet" href="style.css" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    form {
-      max-width: 400px;
-      margin: 2em auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-    }
-
-    input, select, button {
-      padding: 10px;
-      font-size: 1em;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-
-    label {
-      text-align: left;
-      font-weight: bold;
-    }
-
-    button {
-      background: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #0056b3;
-    }
-  </style>
 </head>
 <body>
   <header>
     <h1>Checkout</h1>
-    <nav><a href="cart.html">← Back to Cart</a></nav>
+    <nav><a href="products.html">← Back to Products</a></nav>
   </header>
 
-  <main>
-    <form id="checkout-form" method="POST" action="https://formspree.io/f/xovwbdvp" data-redirect="thankyou.html">
-      <label>
-        Full Name
-        <input type="text" name="name" id="name" required />
-      </label>
+  <main style="padding: 20px; max-width: 600px; margin: auto;">
+    <form id="checkout-form" method="POST" action="https://formspree.io/f/xovwbdvp">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" required />
 
-      <label>
-        Address
-        <input type="text" name="address" id="address" required />
-      </label>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
 
-      <label>
-        Eircode
-        <input type="text" name="eircode" id="eircode" required />
-      </label>
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required />
 
-      <label>
-        Phone Number
-        <input type="tel" name="phone" id="phone" required />
-      </label>
+      <div id="address-field">
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" />
+      </div>
 
-      <label>
-        Email Address
-        <input type="email" name="email" id="email" required />
-      </label>
+      <div id="eircode-field">
+        <label for="eircode">Eircode:</label>
+        <input type="text" id="eircode" name="eircode" />
+      </div>
 
-      <label>
-        Payment Method
-        <select name="payment_method" id="payment_method" required>
-          <option value="Cash on Collection">Cash on Collection</option>
-          <option value="Online (coming soon)">Online (coming soon)</option>
-        </select>
-      </label>
-
-      <!-- Hidden field for cart summary -->
-      <input type="hidden" name="order_details" id="order_details" />
-
-      <button type="submit">Place Order</button>
+      <button type="submit">Submit Order</button>
     </form>
   </main>
 
+  <!-- Optional cart data handling -->
+  <script src="js/atlos.js"></script>
+
+  <!-- Hide Address & Eircode dynamically -->
   <script>
-    const form = document.getElementById("checkout-form");
+    document.addEventListener("DOMContentLoaded", function () {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const noAddressProducts = ['Year Only', 'Unlimited Sub Only'];
+      const requiresAddress = cart.some(item => !noAddressProducts.includes(item.name));
 
-    form.addEventListener("submit", function (e) {
-      // Build cart summary
-      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      let summary = "🛒 Order Summary:\n";
-      let total = 0;
-
-      cart.forEach(item => {
-        summary += `- ${item.name} × ${item.qty} = €${(item.price * item.qty).toFixed(2)}\n`;
-        total += item.price * item.qty;
-      });
-
-      summary += `\nTotal: €${total.toFixed(2)}\n`;
-      summary += `Payment Method: ${document.getElementById("payment_method").value}\n`;
-      summary += `Time: ${new Date().toLocaleString()}`;
-
-      // Inject summary
-      document.getElementById("order_details").value = summary;
-
-      // Clear cart + customer data after a short delay
-      setTimeout(() => {
-        localStorage.removeItem("cart");
-        localStorage.removeItem("stock");
-        localStorage.removeItem("customer");
-      }, 100);
+      if (!requiresAddress) {
+        document.getElementById("address-field").style.display = "none";
+        document.getElementById("eircode-field").style.display = "none";
+      }
     });
   </script>
 </body>
