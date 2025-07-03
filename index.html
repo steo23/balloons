@@ -2,24 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome to My Store</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Centered content styling */
+    .centered-content {
+      text-align: center;
+      padding: 40px 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  </style>
 </head>
 <body>
-  <header>
+  <header style="background: #007bff; padding: 15px; color: white; text-align: center;">
     <h1>Welcome to My Store</h1>
-    <nav><a href="index.html">Home</a> | 
-  <a href="products.html">Products</a> | 
-  <a href="guides.html">Guides</a> | 
-  <a href="cart.html">Cart</a></nav>
+    <nav>
+      <a href="index.html" style="color: white; margin: 0 5px;">Home</a> |
+      <a href="products.html" style="color: white; margin: 0 5px;">Products</a> |
+      <a href="guides.html" style="color: white; margin: 0 5px;">Guides</a> |
+      <a href="cart.html" style="color: white; margin: 0 5px;">Cart</a>
+    </nav>
   </header>
 
   <main>
-    <h2>We sell quality items at affordable prices!</h2>
-    <p>Click "View Products" to start shopping.</p>
+    <div class="centered-content">
+      <h2>We sell quality items at affordable prices!</h2>
+      <p>Click "View Products" to start shopping.</p>
+      <p>© 2025 My Store</p>
+    </div>
   </main>
-
-  <footer>&copy; 2025 My Store</footer>
 </body>
 </html>
