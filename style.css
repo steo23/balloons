@@ -13,11 +13,11 @@ body {
   line-height: 1.6;
 }
 
-/* Containers */
+/* Make sure main containers have padding and visible background */
 main, header, footer, nav, section, article, div {
   position: relative;
   z-index: 1;
-  background-color: #fff;
+  background-color: #fff; /* solid white background */
   padding: 20px;
   border-radius: 8px;
   max-width: 960px;
@@ -70,7 +70,7 @@ nav a:focus {
   padding: 20px 0;
 }
 
-/* Product cards */
+/* Individual product cards */
 .product {
   background-color: #fafafa;
   border: 1px solid #ddd;
@@ -95,6 +95,7 @@ nav a:focus {
 .product h3 {
   margin: 10px 0 5px;
   font-size: 1.25rem;
+  color: white; /* Keep heading white on blue backgrounds */
 }
 
 .product p {
@@ -220,15 +221,16 @@ textarea {
   min-height: 100px;
 }
 
-/* Heading visibility forced black */
+/* Heading visibility and color fix */
 h1, h2, h3, h4, h5, h6 {
-  color: black !important;
   opacity: 1 !important;
+  color: white !important; /* white text for headers on blue bg */
   visibility: visible !important;
   position: relative !important;
-  z-index: 9999 !important;
+  z-index: 10 !important;
   background: transparent !important;
   user-select: text !important;
-  -webkit-text-fill-color: black !important;
+  -webkit-text-fill-color: white !important;
   -webkit-text-stroke: 0 !important;
+  transition: none !important;
 }
