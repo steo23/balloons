@@ -1,22 +1,17 @@
-/* Basic body styles with visible text and backgrounds */
+/* Basic body styles with visible text */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   color: #111;
-  background-color: #fff;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover;
+  background-color: #fff; /* Plain white background */
   min-height: 100vh;
 }
 
-/* Ensure main content and common elements are readable above backgrounds */
+/* Ensure main content and common elements are styled */
 main, header, footer, nav, section, article, div {
   position: relative;
   z-index: 1;
-  background-color: rgba(255, 255, 255, 0.85); /* translucent white */
   padding: 15px;
   border-radius: 8px;
   margin: 20px auto;
@@ -24,6 +19,7 @@ main, header, footer, nav, section, article, div {
   box-sizing: border-box;
 }
 
+/* Header styles */
 header {
   background-color: #007bff;
   color: white;
@@ -171,32 +167,6 @@ a button {
 
 .product img:hover {
   transform: scale(1.05);
-}
-
-/* Page-specific backgrounds */
-body.home-page {
-  background: url('images/home-bg.jpg') no-repeat center center fixed;
-  background-size: cover;
-}
-
-body.products-page {
-  background: url('images/products-bg.jpg') no-repeat center center fixed;
-  background-size: cover;
-}
-
-body.guides-page {
-  background: url('images/guides-bg.jpg') no-repeat center center fixed;
-  background-size: cover;
-}
-
-body.cart-page {
-  background: url('images/cart-bg.jpg') no-repeat center center fixed;
-  background-size: cover;
-}
-
-body.contact-page {
-  background: url('images/contact-bg.jpg') no-repeat center center fixed;
-  background-size: cover;
 }
 
 /* Checkout Form Styling */
