@@ -80,10 +80,12 @@ button {
   font-size: 15px;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
+button:hover:not(:disabled) {
   background-color: #0056b3;
+  transform: scale(1.05);
 }
 
 button:disabled {
@@ -111,4 +113,99 @@ a button {
   button {
     width: 100%;
   }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.product {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.product:nth-child(1) { animation-delay: 0.1s; }
+.product:nth-child(2) { animation-delay: 0.2s; }
+.product:nth-child(3) { animation-delay: 0.3s; }
+.product:nth-child(4) { animation-delay: 0.4s; }
+
+.product img {
+  transition: transform 0.3s ease;
+}
+
+.product img:hover {
+  transform: scale(1.05);
+}
+
+/* Page-specific backgrounds */
+body.home-page {
+  background: url('images/home-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+body.products-page {
+  background: url('images/products-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+body.guides-page {
+  background: url('images/guides-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+body.cart-page {
+  background: url('images/cart-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+body.contact-page {
+  background: url('images/contact-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Checkout Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Footer Styling */
+footer {
+  text-align: center;
+  padding: 15px;
+  background: #007bff;
+  color: white;
+  font-family: Arial, sans-serif;
 }
