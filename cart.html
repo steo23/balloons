@@ -5,6 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Your Cart - Balloons Shop</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    main {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    .empty-cart {
+      font-size: 1.2rem;
+      text-align: center;
+      color: #555;
+      margin-top: 40px;
+    }
+  </style>
 </head>
 <body class="cart-page">
   <header>
@@ -19,7 +33,18 @@
   </header>
 
   <main>
-    <!-- Your cart content -->
+    <!-- Example cart content -->
+    <div id="cart-items">
+      <!-- Cart items will be dynamically added here by your JavaScript -->
+    </div>
+
+    <p class="empty-cart" id="empty-cart-message">Your cart is currently empty.</p>
   </main>
+
+  <footer>
+    &copy; 2025 Balloons Shop
+  </footer>
+
+  <script src="js/atlos.js"></script>
 </body>
 </html>
