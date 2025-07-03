@@ -223,7 +223,7 @@ textarea {
   min-height: 100px;
 }
 
-/* Remove heading opacity fade */
+/* Force headings fully visible, no opacity fade */
 h1, h2, h3, h4, h5, h6 {
   opacity: 1 !important;
   color: #222 !important;
