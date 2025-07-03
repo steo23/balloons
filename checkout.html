@@ -14,21 +14,28 @@
 
   <main style="padding: 20px; max-width: 600px; margin: auto;">
     <form id="checkout-form" method="POST" action="https://formspree.io/f/xovwbdvp">
-      <label for="name">Full Name:</label>
-      <input type="text" id="name" name="name" required />
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required />
+      <div class="form-group">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required />
+      </div>
 
-      <label for="phone">Phone Number:</label>
-      <input type="tel" id="phone" name="phone" required />
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+      </div>
 
-      <div id="address-field">
+      <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required />
+      </div>
+
+      <div class="form-group" id="address-field">
         <label for="address">Address:</label>
         <input type="text" id="address" name="address" />
       </div>
 
-      <div id="eircode-field">
+      <div class="form-group" id="eircode-field">
         <label for="eircode">Eircode:</label>
         <input type="text" id="eircode" name="eircode" />
       </div>
@@ -37,10 +44,8 @@
     </form>
   </main>
 
-  <!-- Optional cart data handling -->
   <script src="js/atlos.js"></script>
 
-  <!-- Hide Address & Eircode dynamically -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
