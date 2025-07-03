@@ -1,12 +1,3 @@
-h1, h2, h3, h4, h5, h6 {
-  opacity: 1 !important;
-  color: #222 !important;
-  visibility: visible !important;
-  transition: none !important;
-  user-select: text !important;
-  position: relative !important;
-  z-index: 9999 !important;
-}
 /* Reset and base */
 * {
   box-sizing: border-box;
@@ -232,7 +223,7 @@ textarea {
   min-height: 100px;
 }
 
-/* Force headings fully visible, no opacity fade */
+/* Fix heading visibility - no opacity fade */
 h1, h2, h3, h4, h5, h6 {
   opacity: 1 !important;
   color: #222 !important;
