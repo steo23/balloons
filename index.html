@@ -6,6 +6,40 @@
   <title>Welcome to My Store</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    header {
+      background-color: #007bff;
+      padding: 20px 0;
+      color: white;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.4rem;
+      font-weight: bold;
+    }
+
+    nav {
+      margin-top: 8px;
+      font-size: 1.1rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      color: #ffdd57; /* bright accent on hover/focus */
+      outline: none;
+    }
+
     /* Centered content styling */
     .centered-content {
       text-align: center;
@@ -16,13 +50,13 @@
   </style>
 </head>
 <body>
-  <header style="background: #007bff; padding: 15px; color: white; text-align: center;">
+  <header>
     <h1>Welcome to My Store</h1>
     <nav>
-      <a href="index.html" style="color: white; margin: 0 5px;">Home</a> |
-      <a href="products.html" style="color: white; margin: 0 5px;">Products</a> |
-      <a href="guides.html" style="color: white; margin: 0 5px;">Guides</a> |
-      <a href="cart.html" style="color: white; margin: 0 5px;">Cart</a>
+      <a href="index.html">Home</a> |
+      <a href="products.html">Products</a> |
+      <a href="guides.html">Guides</a> |
+      <a href="cart.html">Cart</a>
     </nav>
   </header>
 
